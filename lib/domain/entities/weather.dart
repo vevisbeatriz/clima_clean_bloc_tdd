@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 
+/// Data model that represents weather data in the application. It extends the Equatable class, which allows instances of WeatherEntity to be compared based on their values rather than their references.
 class WeatherEntity extends Equatable{
   const WeatherEntity({
     required this.cityName,

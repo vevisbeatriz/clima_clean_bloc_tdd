@@ -10,6 +10,7 @@ import 'package:clima_clean_bloc_tdd/presentation/bloc/weather_event.dart';
 import 'package:clima_clean_bloc_tdd/presentation/bloc/weather_state.dart';
 import 'package:clima_clean_bloc_tdd/presentation/pages/weather_page.dart';
 
+// This test suite is for the WeatherPage class.
 class MockWeatherBloc extends MockBloc<WeatherEvent, WeatherState>
     implements WeatherBloc {}
 
@@ -40,9 +41,10 @@ void main() {
     humidity: 70,
   );
 
+  // This test verifies that the text field triggers a state change from empty to loading when a city name is entered.
   testWidgets(
     'text field should trigger state to change from empty to loading',
-    (widgetTester) async {
+        (widgetTester) async {
       //arrange
       when(() => mockWeatherBloc.state).thenReturn(WeatherEmpty());
 
@@ -52,13 +54,16 @@ void main() {
       expect(textField, findsOneWidget);
       await widgetTester.enterText(textField, 'New York');
       await widgetTester.pump();
+
+      //assert
       expect(find.text('New York'), findsOneWidget);
     },
   );
 
+  // This test verifies that a progress indicator is shown when the state is loading.
   testWidgets(
     'should show progress indicator when state is loading',
-    (widgetTester) async {
+        (widgetTester) async {
       //arrange
       when(() => mockWeatherBloc.state).thenReturn(WeatherLoading());
 
@@ -70,9 +75,10 @@ void main() {
     },
   );
 
+  // This test verifies that a widget containing weather data is shown when the state is WeatherLoaded.
   testWidgets(
     'should show widget contain weather data when state is weather loaded',
-    (widgetTester) async {
+        (widgetTester) async {
       //arrange
       when(() => mockWeatherBloc.state)
           .thenReturn(WeatherLoaded(testWeather));

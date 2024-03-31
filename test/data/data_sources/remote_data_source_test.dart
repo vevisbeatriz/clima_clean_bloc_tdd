@@ -8,6 +8,7 @@ import 'package:http/http.dart' as http;
 import '../../helpers/json_reader.dart';
 import '../../helpers/test_helper.mocks.dart';
 
+/// This test suite is for the `WeatherRemoteDataSourceImpl` class.
 void main() {
   late MockHttpClient mockHttpClient;
   late WeatherRemoteDataSourceImpl weatherRemoteDataSourceImpl;
@@ -21,22 +22,24 @@ void main() {
   const testCityName = 'New York';
 
   group('get current weather', () {
+    /// This test verifies that the `getCurrentWeather` method of `WeatherRemoteDataSourceImpl` returns a `WeatherModel` when the HTTP response code is 200.
     test('should return weather model when the response code is 200', () async {
       //arrange
       when(mockHttpClient
-              .get(Uri.parse(Urls.currentWeatherByName(testCityName))))
+          .get(Uri.parse(Urls.currentWeatherByName(testCityName))))
           .thenAnswer((_) async => http.Response(
-              readJson('helpers/dummy_data/dummy_weather_response.json'), 200));
+          readJson('helpers/dummy_data/dummy_weather_response.json'), 200));
       //act
       final result =
-          await weatherRemoteDataSourceImpl.getCurrentWeather(testCityName);
+      await weatherRemoteDataSourceImpl.getCurrentWeather(testCityName);
       //assert
       expect(result, isA<WeatherModel>());
     });
 
+    /// This test verifies that the `getCurrentWeather` method of `WeatherRemoteDataSourceImpl` throws a `ServerException` when the HTTP response code is 404 or other.
     test(
       'should throw a server exception when the response code is 404 or other',
-      () async {
+          () async {
         //arrange
         when(
           mockHttpClient
@@ -44,7 +47,7 @@ void main() {
         ).thenAnswer((_) async => http.Response('Not found', 404));
         //act
         final result =
-            weatherRemoteDataSourceImpl.getCurrentWeather(testCityName);
+        weatherRemoteDataSourceImpl.getCurrentWeather(testCityName);
         //assert
         expect(result, throwsA(isA<ServerException>()));
       },

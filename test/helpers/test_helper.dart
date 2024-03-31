@@ -4,6 +4,7 @@ import 'package:mockito/annotations.dart';
 import 'package:clima_clean_bloc_tdd/domain/repositories/weather_repository.dart';
 import 'package:http/http.dart' as http;
 
+// This function generates mocks for WeatherRepository, WeatherRemoteDataSource, GetCurrentWeatherUseCase, and http.Client.
 @GenerateMocks(
   [
     WeatherRepository,

@@ -10,6 +10,7 @@ import 'package:clima_clean_bloc_tdd/presentation/bloc/weather_state.dart';
 
 import '../../helpers/test_helper.mocks.dart';
 
+// This test suite is for the WeatherBloc class.
 void main() {
 
   late MockGetCurrentWeatherUseCase mockGetCurrentWeatherUseCase;
@@ -32,6 +33,7 @@ void main() {
 
   const testCityName = 'New York';
 
+  // This test verifies that the initial state of the WeatherBloc is WeatherEmpty.
   test(
       'initial state should be empty',
           () {
@@ -39,7 +41,7 @@ void main() {
       }
   );
 
-
+  // This test verifies that the WeatherBloc emits the correct states when it successfully retrieves weather data.
   blocTest<WeatherBloc,WeatherState>(
       'should emit [WeatherLoading, WeatherLoaded] when data is gotten successfully',
       build: () {
@@ -56,7 +58,7 @@ void main() {
       ]
   );
 
-
+  // This test verifies that the WeatherBloc emits the correct states when it fails to retrieve weather data.
   blocTest<WeatherBloc,WeatherState>(
       'should emit [WeatherLoading, WeatherLoadFailure] when get data is unsuccessful',
       build: () {
@@ -72,6 +74,4 @@ void main() {
         const WeatherLoadFailure('Server failure'),
       ]
   );
-
-
 }
