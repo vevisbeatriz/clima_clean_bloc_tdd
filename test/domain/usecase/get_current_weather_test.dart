@@ -5,6 +5,7 @@ import 'package:clima_clean_bloc_tdd/domain/entities/weather.dart';
 import 'package:clima_clean_bloc_tdd/domain/usecases/get_current_weather.dart';
 import '../../helpers/test_helper.mocks.dart';
 
+// This test suite is for the GetCurrentWeatherUseCase class.
 void main() {
   late GetCurrentWeatherUseCase getCurrentWeatherUseCase;
   late MockWeatherRepository mockWeatherRepository;
@@ -26,6 +27,7 @@ void main() {
 
   const testCityName = 'New York';
 
+  // This test verifies that the execute method of GetCurrentWeatherUseCase correctly retrieves the current weather details from the WeatherRepository.
   test('should get current weather detail from the repository', () async {
     // arrange
     when(mockWeatherRepository.getCurrentWeather(testCityName))

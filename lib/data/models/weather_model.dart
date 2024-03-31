@@ -1,5 +1,6 @@
 import 'package:clima_clean_bloc_tdd/domain/entities/weather.dart';
 
+/// Data model that extends the WeatherEntity class. It is used to represent weather data in the application.
 class WeatherModel extends WeatherEntity {
   const WeatherModel({
     required String cityName,

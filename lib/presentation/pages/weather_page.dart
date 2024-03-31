@@ -6,6 +6,7 @@ import 'package:clima_clean_bloc_tdd/presentation/bloc/weather_bloc.dart';
 import 'package:clima_clean_bloc_tdd/presentation/bloc/weather_event.dart';
 import 'package:clima_clean_bloc_tdd/presentation/bloc/weather_state.dart';
 
+/// `WeatherPage` is a stateless widget that represents the main page of the weather feature in the application.
 class WeatherPage extends StatelessWidget {
   const WeatherPage({ Key? key }) : super(key: key);
 
@@ -41,12 +42,14 @@ class WeatherPage extends StatelessWidget {
                 ),
               ),
               onChanged: (query) {
+                // When the text in the TextField changes, it triggers the `OnCityChanged` event in the `WeatherBloc`.
                 context.read<WeatherBloc>().add(OnCityChanged(query));
               },
             ),
             const SizedBox(height: 32.0),
             BlocBuilder<WeatherBloc,WeatherState>(
               builder: (context,state) {
+                // Depending on the current state of the `WeatherBloc`, it displays different widgets.
                 if (state is WeatherLoading) {
                   return const Center(
                     child: CircularProgressIndicator(),
@@ -91,6 +94,7 @@ class WeatherPage extends StatelessWidget {
                           width: 1,
                         ),
                         children: [
+                          // The Table displays the temperature, pressure, and humidity of the fetched weather data.
                           TableRow(
                               children: [
                                 const Padding(
@@ -172,6 +176,7 @@ class WeatherPage extends StatelessWidget {
                   );
                 }
                 if (state is WeatherLoadFailure) {
+                  // If the state is `WeatherLoadFailure`, it displays the error message.
                   return Center(
                     child: Text(state.message),
                   );
